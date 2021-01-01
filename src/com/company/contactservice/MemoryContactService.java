@@ -4,11 +4,11 @@ import com.company.Contact;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MemoryContactService implements ContactService {
 
     private static List<Contact> list = new ArrayList<>();
-    private List<Contact> values;
 
     @Override
     public List<Contact> getAll() {
@@ -27,29 +27,15 @@ public class MemoryContactService implements ContactService {
 
     @Override
     public List<Contact> getContactByNumber(String value) {
-        values = new ArrayList<>();
-
-        for (Contact c : list
-        ) {
-            if (c.getPhone().contains(value)) {
-                values.add(c);
-            }
-        }
-
-        return values;
+        return list.stream().
+                filter(contact -> contact.getPhone().contains(value)).
+                collect(Collectors.toList());
     }
 
     @Override
     public List<Contact> getContactByName(String value) {
-        values = new ArrayList<>();
-
-        for (Contact c : list
-        ) {
-            if (c.getName().startsWith(value)) {
-                values.add(c);
-            }
-        }
-
-        return values;
+        return list.stream().
+                filter(contact -> contact.getName().startsWith(value)).
+                collect(Collectors.toList());
     }
 }

@@ -11,7 +11,6 @@ public class Main {
     public static void main(String[] args) {
         Menu menu = new Menu();
         Scanner s = new Scanner(System.in);
-
         MemoryContactService memory = new MemoryContactService();
 
         menu.addAction(new ReadAllContactsMenuAction(memory));
@@ -32,7 +31,6 @@ public class Main {
 
             if (menu.checkCloseStatus(choice - 1)) return;
             menu.doAction(choice - 1);
-
 
         }
     }
